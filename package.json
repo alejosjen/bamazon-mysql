@@ -1,0 +1,25 @@
+{
+  "name": "bamazon-mysql",
+  "version": "1.0.0",
+  "description": "This is a node application using MySQL, it's an Amazon-like storefront that takes orders from customers that then relays that to the database to show depletion of stock.",
+  "main": "bamazonCustomer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alejosjen/bamazon-mysql.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alejosjen/bamazon-mysql/issues"
+  },
+  "homepage": "https://github.com/alejosjen/bamazon-mysql#readme",
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "inquirer": "^6.2.1",
+    "mysql": "^2.16.0"
+  }
+}
