@@ -4,13 +4,13 @@ var keys = require("./keys.js");
 var mysql = require("mysql");
 const Table = require('cli-table');
 
-// var connection = mysql.createConnection({
-//     host: keys.mySQL.host,
-//     port: keys.mySQL.port,
-//     user: keys.mySQL.username,
-//     password: keys.mySQL.password,
-//     database: keys.mySQL.database
-// });
+var connection = mysql.createConnection({
+    host: keys.mySQL.host,
+    port: keys.mySQL.port,
+    user: keys.mySQL.username,
+    password: keys.mySQL.password,
+    database: keys.mySQL.database
+});
 
 connection.connect(function (err) {
     if (err) throw err;
@@ -59,6 +59,8 @@ connection.connect(function (err) {
 
             //Input item request
             var orderID = answer.order;
+            //CHANGE THIS!
+            bandName = orderID.replace(/\"/g, '');
             var string = orderID.toString();
             var number = Number.parseFloat(string);
 
@@ -83,7 +85,6 @@ connection.connect(function (err) {
                 var query = "SELECT * FROM products WHERE item_ID=" + orderID;
                 connection.query(query, function (error, response) {
                     if (error) throw error;
-                    // var stock = response;
                     for (var j = 0; j < response.length; j++) {
                         var customerSelection = response[j].item_id;
                         var customerProductName = response[j].product_name;
