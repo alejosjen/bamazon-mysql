@@ -2,7 +2,7 @@ require("dotenv").config();
 var inquirer = require("inquirer");
 var keys = require("./keys.js");
 var mysql = require("mysql");
-// import Table from 'cli-table';
+const Table = require('cli-table');
 
 var connection = mysql.createConnection({
     host: keys.mySQL.host,
@@ -19,25 +19,24 @@ connection.connect(function (err) {
 });
 
 function readProducts() {
-    console.log("Available products for sale: ")
-    var query = "SELECT item_id,product_name,department_name,price,stock_quantity FROM products";
+    var query = "SELECT * FROM products";
     connection.query(query, function (error, response) {
         if (error) throw error;
+        const table = new Table({
+            head: ['ID', 'Product', 'Department', 'Price', 'Stock']
+            , colWidths: [5, 25, 18, 8, 9]
+        });
+
         for (var i = 0; i < response.length; i++) {
-            console.log(
-                "ID: " +
-                response[i].item_id +
-                " || Product: " +
-                response[i].product_name +
-                // " || Department: " +
-                // response[i].department_name +
-                " || Price: $" +
-                response[i].price
-                // +
-                // " || Stock: " +
-                // response[i].stock_quantity
-            );
+        table.push(
+            [response[i].item_id, 
+            response[i].product_name, 
+            response[i].department_name, 
+            response[i].price, 
+            response[i].stock_quantity]
+        );
         };
+        console.log(table.toString());
         promptOrderID();
     });
 };
