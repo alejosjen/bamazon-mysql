@@ -83,24 +83,32 @@ connection.connect(function (err) {
             connection.query(query, function (error, response) {
                 if (error) throw error;
                 for (var j = 0; j < response.length; j++) {
+                    var itemName = response[j].product_name;
                     var stockAvailable = response[j].stock_quantity;
                     var itemPrice = response[j].price;
                     var updatedStock = stockAvailable - amountOrdered;
                     var customerBill = itemPrice * amountOrdered;
 
                     if (amountOrdered <= stockAvailable) {
+                        console.log("Your ordered item: " + itemName);
                         console.log("Your requested amount: " + amountOrdered);
                         console.log("In Stock");
                         console.log("Your bill: $" + customerBill);
-                        
-                        
                     } else {
                         console.log("Insufficient quantity!")
                         console.log("Amount available: " + stockAvailable);
                     };
                 }
-            })
+            });
             
+            var query = connection.query(
+                `UPDATE products 
+                 SET stock_quantity = stock_quantity - ${amountOrdered}
+                 WHERE item_id = ${orderID}`,
+                function (error, response) {
+                    if (error) throw error;
+                    console.log(response.affectedRows + " stock updated.\n");
+                });
 
             connection.end();
         })
