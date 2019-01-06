@@ -59,8 +59,6 @@ connection.connect(function (err) {
 
             //Input item request
             var orderID = answer.order;
-            //CHANGE THIS!
-            bandName = orderID.replace(/\"/g, '');
             var string = orderID.toString();
             var number = Number.parseFloat(string);
 
@@ -81,28 +79,29 @@ connection.connect(function (err) {
                 promptOrder();
             }
 
-            function checkStock() {
-                var query = "SELECT * FROM products WHERE item_ID=" + orderID;
-                connection.query(query, function (error, response) {
-                    if (error) throw error;
-                    for (var j = 0; j < response.length; j++) {
-                        var customerSelection = response[j].item_id;
-                        var customerProductName = response[j].product_name;
-                        var customerDepartment = response[j].department_name;
-                        var customerPrice = response[j].price;
-                        var customerStockAvailable = response[j].stock_quantity;
+            var query = "SELECT * FROM products WHERE item_ID=" + orderID;
+            connection.query(query, function (error, response) {
+                if (error) throw error;
+                for (var j = 0; j < response.length; j++) {
+                    var stockAvailable = response[j].stock_quantity;
+                    var itemPrice = response[j].price;
+                    var updatedStock = stockAvailable - amountOrdered;
+                    var customerBill = itemPrice * amountOrdered;
 
-                        if (amountOrdered <= customerStockAvailable) {
-                            console.log("Your requested amount: " + amountOrdered);
-                            console.log("In Stock");
-                        } else {
-                            console.log("Insufficient quantity!")
-                            console.log("Amount available: " + customerStockAvailable);
-                        };
-                    }
-                })
-            };
-            checkStock();
+                    if (amountOrdered <= stockAvailable) {
+                        console.log("Your requested amount: " + amountOrdered);
+                        console.log("In Stock");
+                        console.log("Your bill: $" + customerBill);
+                        
+                        
+                    } else {
+                        console.log("Insufficient quantity!")
+                        console.log("Amount available: " + stockAvailable);
+                    };
+                }
+            })
+            
+
             connection.end();
         })
     };
