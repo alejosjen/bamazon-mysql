@@ -47,31 +47,48 @@ function promptOrder() {
         {
             name: "order",
             message: "Welcome to Bamazon\n" +
-                "To order, type in a number ID from the table and press enter."
-        },
-        {
-            name: "amount",
-            message: "How many would you like to order? Enter a number and press enter."
+                "To order, type in a number ID from the table and press enter.\n Type in 'exit' to leave the store."
         }
     ]).then(function (answer, error) {
         if (error) throw error;
         //Input item request
         var orderID = answer.order;
-        var string = orderID.toString();
-        var number = Number.parseFloat(string);
+        if (orderID === "exit"){
+            connection.end();
+            return;
+        }
+        // var string = orderID.toString();
+        // var number = Number.parseFloat(string);
         //Input-validation for item request
-        if (Number.isNaN(number) || orderID === "" || orderID === false || orderID === null || orderID === undefined) {
+        if (isNaN(parseInt(orderID))) {
             console.log("Please retry by entering an ID number.");
             promptOrder();
+            return;
         }
+        promptQuantity(orderID);
+    })
+};
+
+function promptQuantity(orderID) {
+    inquirer.prompt([
+        {
+            name: "amount",
+            message: "How many would you like to order? Enter a number and press enter.\n Type in 'exit' to leave the store."
+        }
+    ]).then(function (answer, error) {
         //Input order amount
         var amountOrdered = answer.amount;
-        var stringIt = amountOrdered.toString();
-        var isNumber = Number.parseFloat(stringIt);
+        if (amountOrdered === "exit"){
+            connection.end();
+            return;
+        }
+        // var stringIt = amountOrdered.toString();
+        // var isNumber = Number.parseFloat(stringIt);
         //Input-validation for order amount
-        if (Number.isNaN(isNumber) || amountOrdered === 0 || amountOrdered === "" || amountOrdered === false || amountOrdered === null || amountOrdered === undefined) {
+        if (isNaN(parseInt(amountOrdered))) {
             console.log("Please retry by entering a number or amount greater than 0.");
             promptOrder();
+            return;
         }
         //Select the row of the requested item, check stock availability, and calculate bill if sufficient stock is available
         connection.query("SELECT * FROM products WHERE item_ID=" + orderID, function (error, response) {
@@ -97,13 +114,29 @@ function promptOrder() {
         });
         //Update database by subtracting order amount from the stock quantity
         connection.query(
-                `UPDATE products 
+            `UPDATE products 
                  SET stock_quantity = stock_quantity - ${amountOrdered}
                  WHERE item_id = ${orderID}`,
-                function (error, response) {
-                    if (error) throw error;
-                    console.log("Confirmation: " + response.affectedRows + " stock quantity updated.\n");
-                });
+            function (error, response) {
+                if (error) throw error;
+                console.log("Confirmation: " + response.affectedRows + " stock quantity updated.\n");
+                promptReorder();
+            });
+    })
+}
+function promptReorder(){
+    inquirer.prompt([
+        {
+            type: "confirm",
+            name: "reorder",
+            message: "Would you like to order again?"
+        }
+    ]).then(function (answer, error) {
+        if (answer.reorder) {
+            promptOrder();
+        } else {
+            console.log("Thank you for shopping. Come again!")
             connection.end();
-        })
-};
+        }
+    })
+}
