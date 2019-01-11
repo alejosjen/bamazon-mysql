@@ -6,5 +6,7 @@ To Use:
 You will need to have node modules installed: inquirer, cli-table, and mysql. MySQL Workbench is used as the database in this application.
 
 As a customer:
-Type in node bamazonCustomer.js to begin the application. It will give you a notice if the connection is made.
-A table listing will appear with available products in the store. Each product has an ID, a title and a price.
+Type in node bamazonCustomer.js to begin the application. It will give notice if the connection is made.
+A table listing will appear with available products in the store. Each product has an ID, a title and a price. Select a product by typing the number of the ID and pressing enter. The next prompt will ask how many of the items to purchase, which is answered by typing in a number again and pressing enter. The two prompts will allow the user to exit by typing 'exit' before the transaction is made.
+Once a complete order is made, the application will return the name of the item, the total price
+
