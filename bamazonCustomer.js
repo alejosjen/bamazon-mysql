@@ -46,8 +46,8 @@ function promptOrder() {
     inquirer.prompt([
         {
             name: "order",
-            message: "Welcome to Bamazon\n" +
-                "To order, type in a number ID from the table and press enter.\n Type in 'exit' to leave the store."
+            message:"------------- Welcome to Bamazon ------------- \n" +
+                    "To order, type in a number ID from the table and press enter.\n Type in 'exit' to leave the store."
         }
     ]).then(function (answer, error) {
         if (error) throw error;
@@ -61,7 +61,9 @@ function promptOrder() {
         // var number = Number.parseFloat(string);
         //Input-validation for item request
         if (isNaN(parseInt(orderID))) {
-            console.log("Please retry by entering an ID number.");
+            console.log("---------------------------------------------------\n");
+            console.log("Please retry by entering an ID number.\n");
+            console.log("---------------------------------------------------\n");
             promptOrder();
             return;
         }
@@ -86,7 +88,9 @@ function promptQuantity(orderID) {
         // var isNumber = Number.parseFloat(stringIt);
         //Input-validation for order amount
         if (isNaN(parseInt(amountOrdered))) {
-            console.log("Please retry by entering a number or amount greater than 0.");
+            console.log("---------------------------------------------------\n");
+            console.log("Please retry by entering a number or amount greater than 0.\n");
+            console.log("---------------------------------------------------\n");
             promptOrder();
             return;
         }
@@ -96,34 +100,48 @@ function promptQuantity(orderID) {
             //Select row of item information from user's order
             for (var j = 0; j < response.length; j++) {
                 var itemName = response[j].product_name;
+                var department = response[j].department_name;
                 var stockAvailable = response[j].stock_quantity;
                 var itemPrice = response[j].price;
                 var customerBill = itemPrice * amountOrdered;
                 //Checking amount ordered versus stock available
                 if (amountOrdered <= stockAvailable) {
-                    console.log("\nYour item(s): " + itemName);
+                    console.log("---------------------------------------------------\n");
+                    console.log("Your Receipt:");
+                    console.log("\nProduct(s): " + itemName + " from the " + department + " department");
                     console.log("Amount ordered: " + amountOrdered);
                     console.log("Your bill: $" + customerBill);
-                    console.log("Your item will be delivered in 5-10 business days.");
-                    console.log("Thank you for shopping with Bamazon\n");
+                    console.log("Your item will be delivered in 5-10 business days.\n");
+                    console.log("---------------------------------------------------\n");
+                    console.log("Thank you for shopping with Bamazon!\n");
+                    console.log("---------------------------------------------------\n");
+                    updateDatabase(amountOrdered, orderID);
                 } else {
+                    console.log("---------------------------------------------------\n");
                     console.log("Insufficient quantity!")
-                    console.log("Amount available: " + stockAvailable);
+                    console.log("Amount available: " + stockAvailable +"\n");
+                    console.log("---------------------------------------------------\n");
+                    promptReorder();
                 };
             }
         });
-        //Update database by subtracting order amount from the stock quantity
+        
+    })
+}
+function updateDatabase(amountOrdered, orderID){
+    //Update database by subtracting order amount from the stock quantity
         connection.query(
             `UPDATE products 
                  SET stock_quantity = stock_quantity - ${amountOrdered}
                  WHERE item_id = ${orderID}`,
             function (error, response) {
                 if (error) throw error;
+                console.log("Department use only:");
                 console.log("Confirmation: " + response.affectedRows + " stock quantity updated.\n");
                 promptReorder();
             });
-    })
 }
+
 function promptReorder(){
     inquirer.prompt([
         {
@@ -135,7 +153,9 @@ function promptReorder(){
         if (answer.reorder) {
             promptOrder();
         } else {
-            console.log("Thank you for shopping. Come again!")
+            console.log("---------------------------------------------------\n");
+            console.log("Thank you for shopping. Come again!\n")
+            console.log("---------------------------------------------------\n");
             connection.end();
         }
     })
