@@ -2,7 +2,7 @@ require("dotenv").config();
 var inquirer = require("inquirer");
 var keys = require("./keys.js");
 var mysql = require("mysql");
-const Table = require('cli-table');
+const Table = require("cli-table");
 let table;
 
 var connection = mysql.createConnection({
@@ -57,8 +57,6 @@ function promptOrder() {
             connection.end();
             return;
         }
-        // var string = orderID.toString();
-        // var number = Number.parseFloat(string);
         //Input-validation for item request
         if (isNaN(parseInt(orderID))) {
             console.log("---------------------------------------------------\n");
@@ -84,8 +82,6 @@ function promptQuantity(orderID) {
             connection.end();
             return;
         }
-        // var stringIt = amountOrdered.toString();
-        // var isNumber = Number.parseFloat(stringIt);
         //Input-validation for order amount
         if (isNaN(parseInt(amountOrdered))) {
             console.log("---------------------------------------------------\n");
@@ -112,6 +108,7 @@ function promptQuantity(orderID) {
                     console.log("Amount ordered: " + amountOrdered);
                     console.log("Your bill: $" + customerBill);
                     console.log("Your item will be delivered in 5-10 business days.\n");
+                    console.log("Contact us for large orders, amount available: " + stockAvailable + "\n");
                     console.log("---------------------------------------------------\n");
                     console.log("Thank you for shopping with Bamazon!\n");
                     console.log("---------------------------------------------------\n");
@@ -120,6 +117,7 @@ function promptQuantity(orderID) {
                     console.log("---------------------------------------------------\n");
                     console.log("Insufficient quantity!")
                     console.log("Amount available: " + stockAvailable +"\n");
+                    console.log("Please, contact us for large orders.\n");
                     console.log("---------------------------------------------------\n");
                     promptReorder();
                 };
