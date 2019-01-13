@@ -18,8 +18,7 @@ Typing letters and random things will prompt the user on what to input to comple
 If a quantity is entered that is more the stock available, the application will report insufficent, share what is available and prompt the user to reorder.
 
 ## Shopping Experience
-![Shopping]
-(https://thumbs.gfycat.com/BrownThoughtfulHammerheadshark-size_restricted.gif)
+![Shopping](https://thumbs.gfycat.com/BrownThoughtfulHammerheadshark-size_restricted.gif)
 
 ## Database updating and Input Validation
 ![Database updating and Input Validation](https://thumbs.gfycat.com/EvilWhiteFallowdeer-size_restricted.gif)
