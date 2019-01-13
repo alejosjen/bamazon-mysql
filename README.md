@@ -15,10 +15,12 @@ This is a node application utilizing MySQL. It's an Amazon-like storefront that 
 * Input Validation:
   - Typing letters and random things will prompt the user on what to input to complete an order.
 
-  - If a quantity is entered that is more the stock available, the application will report insufficent, share what is available and prompt the user to reorder.
+  - If a quantity is entered that is more the stock available, the application will report insufficent, share what is available and prompt the user to reorder. The application will not subtract from stock if the request is more than what's in stock.
 
 ## Shopping Experience
+This gif demonstrates entering an ID number and ordering 500 items. The same request is made to show that the database updates the amounts available. The third request shows a more reasonable order and then a choice to leave the store.
 ![Shopping](https://thumbs.gfycat.com/NeatSomeGeese-size_restricted.gif)
 
 ## Exits and Input Validation
+This gif demonstrates exiting the the store before confirmation of sales. The next part shows incorrect usages of the application and the prompt to show expected input. The question is restated, so the user is not necessarily taken back to the store's welcome message. The last part shows what happens when the user requests more than what's in stock.
 ![Database updating and Input Validation](https://thumbs.gfycat.com/EvilWhiteFallowdeer-size_restricted.gif)
