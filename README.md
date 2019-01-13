@@ -1,4 +1,4 @@
-# ![bamazon-mysql] (https://alejosjen.github.io/bamazon-mysql/)
+# [bamazon-mysql](https://alejosjen.github.io/bamazon-mysql/)
 
 This is a node application utilizing MySQL. It's an Amazon-like storefront that takes orders from customers that then updates the store's stock database by subtracting their amounts. It has a friendly user interface that allows the customer to exit the program before and after a transaction. After a transaction the program gives a receipt with the order and the total purchased, as well as giving the customer the option to reorder or exit the application.
 
@@ -18,7 +18,8 @@ Typing letters and random things will prompt the user on what to input to comple
 If a quantity is entered that is more the stock available, the application will report insufficent, share what is available and prompt the user to reorder.
 
 ## Shopping Experience
-![Shopping](https://thumbs.gfycat.com/BrownThoughtfulHammerheadshark-size_restricted.gif)
+![Shopping]
+(https://thumbs.gfycat.com/BrownThoughtfulHammerheadshark-size_restricted.gif)
 
 ## Database updating and Input Validation
 ![Database updating and Input Validation](https://thumbs.gfycat.com/EvilWhiteFallowdeer-size_restricted.gif)
