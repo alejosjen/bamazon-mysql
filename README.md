@@ -18,7 +18,7 @@ This is a node application utilizing MySQL. It's an Amazon-like storefront that 
   - If a quantity is entered that is more the stock available, the application will report insufficent, share what is available and prompt the user to reorder.
 
 ## Shopping Experience
-![Shopping](https://thumbs.gfycat.com/BrownThoughtfulHammerheadshark-size_restricted.gif)
+![Shopping](https://thumbs.gfycat.com/NeatSomeGeese-size_restricted.gif)
 
 ## Exits and Input Validation
 ![Database updating and Input Validation](https://thumbs.gfycat.com/EvilWhiteFallowdeer-size_restricted.gif)
