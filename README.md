@@ -27,4 +27,4 @@ This gif demonstrates exiting the the store before confirmation of sales. The ne
 
 ![Database updating and Input Validation](https://thumbs.gfycat.com/EvilWhiteFallowdeer-size_restricted.gif)
 
-![My website](https://www.jenalejos.com/)
+[My website](https://www.jenalejos.com/)
