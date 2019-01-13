@@ -19,8 +19,10 @@ This is a node application utilizing MySQL. It's an Amazon-like storefront that 
 
 ## Shopping Experience
 This gif demonstrates entering an ID number and ordering 500 items. The same request is made to show that the database updates the amounts available. The third request shows a more reasonable order and then a choice to leave the store.
+
 ![Shopping](https://thumbs.gfycat.com/NeatSomeGeese-size_restricted.gif)
 
 ## Exits and Input Validation
 This gif demonstrates exiting the the store before confirmation of sales. The next part shows incorrect usages of the application and the prompt to show expected input. The question is restated, so the user is not necessarily taken back to the store's welcome message. The last part shows what happens when the user requests more than what's in stock.
+
 ![Database updating and Input Validation](https://thumbs.gfycat.com/EvilWhiteFallowdeer-size_restricted.gif)
