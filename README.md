@@ -20,5 +20,5 @@ This is a node application utilizing MySQL. It's an Amazon-like storefront that 
 ## Shopping Experience
 ![Shopping](https://thumbs.gfycat.com/BrownThoughtfulHammerheadshark-size_restricted.gif)
 
-## Database updating and Input Validation
+## Exits and Input Validation
 ![Database updating and Input Validation](https://thumbs.gfycat.com/EvilWhiteFallowdeer-size_restricted.gif)
